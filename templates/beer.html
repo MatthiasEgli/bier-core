@@ -53,7 +53,7 @@ $(function() {
     updateImg = function(){
         $.getJSON($SCRIPT_ROOT + '/_getImg', {}, function(data) {
             imgVar = data.result;
-            var img = $("<img /\>").attr('src', "../"+imgVar)
+            var img = $("<img width=800/\>").attr('src', "../"+imgVar)
             .load(function() {
                 if (!this.complete || typeof this.naturalWidth == "undefined" || this.naturalWidth == 0) {
                     alert('broken image!');
@@ -94,6 +94,11 @@ html, body {
 	overflow:hidden;
 }
 body > div {
+	position:fixed;
+	top:10px;
+	left:10px;
+}
+body > div > img {
 	position:fixed;
 	top:10px;
 	left:10px;
