@@ -12,8 +12,9 @@ import amivid
 import visid
 import os.path
 import urllib
+from threading import Timer
 
-debug = True
+debug = False
 
 def amivAuth(rfid):
     """Checks if the user may get a beer sponsored by AMIV
@@ -87,17 +88,21 @@ def __getAuthorization(rfid):
     return (returnUser,returnString)
     
 
-def sendToScreen(var, value):
-    """Sends a value using POST to the local (flask) server, used to communicate with the GUI"""
-    serverUrl = "http://localhost:5000/_checkLegi"
-    request = {var: value}
+def sendToScreen(requestDict):
+    """Sends a value using POST to the local (flask) server, used to communicate with the GUI
+
+    :param requestDict: dict holding the vars which should be sent to the webserver"""
+    serverUrl = "http://localhost:5000/api"
+    request = requestDict
     try:
         reply = urllib.urlopen(serverUrl+"?"+urllib.urlencode(request)).read()
     except IOError:
         print "Could not connect to local webserver"
         return
-    if (debug): print "sendToScreen with %s: %s, reply was %s"%(var,value,reply)
+    if (debug): print "sendToScreen with %s, reply was %s"%(request,reply)
 
+def __resetCoreMessage():
+    sendToScreen({'page': ''})
 
 def showCoreMessage(page, code=None, sponsor=None, user=None):
     """Displays a HTML-page on the Display in the core-part, showing the basic info if a legi was accepted"""
@@ -105,24 +110,34 @@ def showCoreMessage(page, code=None, sponsor=None, user=None):
         #Template for sending the info to the display
         #sendToScreen('beerState','authorized')        
         print "%s authorized by %s, press the button!"%(user,sponsor)
-        
+        sendToScreen({'page': page,'sponsor': sponsor})
     if page == 'notAuthorized':
         print "Not authorized, user was: %s"%(user)
+        sendToScreen({'page': page})
         
     if page == 'notRegistered':
         print "Not registered, legi was: %s"%(code)
+        sendToScreen({'page': page})
         
     if page == 'freeBeer':
         print "%s got a free beer, sponsored by %s"%(user,sponsor)
+        sendToScreen({'page': page,'sponsor': sponsor})
+
+    #Start a timer which will reset the display after some time
+    global resetTimer
+    resetTimer.cancel()
+    resetTimer =  Timer(4, __resetCoreMessage)
+    resetTimer.start()
 
 def startApp(appname):
     """Starts a custom app"""
     pass
-        
 
 if __name__ == "__main__":
-    debug = True
-    
+    debug = False
+
+    resetTimer = Timer(4, __resetCoreMessage)
+
     #Load Config Parameters
     config = ConfigParser.RawConfigParser()
     config.readfp(open(os.path.dirname(__file__) + '/core.conf')) #changed this as well because not right directory otherwise (Fadri)
