@@ -19,23 +19,23 @@ $(function() {
             switch(pageVar){
                 case "authorized":
                     $("p#legiok").html("<b>Status:</b> Du hast noch ein Freibier! Sponsored by " + sponsorVar + " <br/\> Bitte Knopf dr&uuml;cken.");
-                    document.getElementsByTagName('section')[0].style.cssText = 'background-color:lightgreen';
+                    document.getElementById('banner').style.cssText = 'background-color:#7fff00';
                     break;
                 case "notAuthorized":
                     $("p#legiok").html("<b>Status:</b> Dein Kontingent ist leider schon aufgebraucht!<br/\>Musst du halt bis morgen warten... ;-)");
-                    document.getElementsByTagName('section')[0].style.cssText = 'background-color:red';
+                    document.getElementById('banner').style.cssText = 'background-color:red';
                     break;
                 case "notRegistered":
                     $("p#legiok").html("<b>Status:</b> Deine Legi ist leider nicht registriert!<br/\>Die Registrierung kannst du gleich selbst vornehmen.");
-                    document.getElementsByTagName('section')[0].style.cssText = 'background-color:pink';
+                    document.getElementById('banner').style.cssText = 'background-color:pink';
                     break;
                 case "freeBeer":
                     $("p#legiok").html("<b>Status:</b> Dein Freibier! Sponsored by " + sponsorVar + " <br/\> Bitte Knopf dr&uuml;cken.");
-                    document.getElementsByTagName('section')[0].style.cssText = 'background-color:lightgreen';
+                    document.getElementById('banner').style.cssText = 'background-color:#7fff00';
                     break;
                 default:
                     $("p#legiok").html("<b>Status:</b> Es ist alles OK!<br/\>F&uuml;r Bierbezug bitte die Legi an den Leser halten.");
-                    document.getElementsByTagName('section')[0].style.cssText = 'background-color:lightblue';
+                    document.getElementById('banner').style.cssText = 'background-color:lightblue';
                     break;
             }
                     
@@ -109,21 +109,38 @@ body > div > button {
 }
 body > section {
 	width:100%;
-	background:lightblue;
 	height:25%;
 	text-align:center;
-	padding: 0.5em 0;
+	padding:0;
 	-moz-box-sizing:border-box;
 	-webkit-box-sizing:border-box;
 }
-#default {}
+#banner{
+	background-color:lightblue;
+	width:100%;
+	height:300px;
+	position:absolute;
+	top:0;
+	left:0;
+	z-index:1;
+}
+#autotext{
+	width:100%;
+	height:300px;
+	position:absolute;
+	top:20px;
+	left:0;
+	text-align:center;
+	z-index:2;
+}
 #legiok {}
-#nobeer {background-color:red;}
-#nolegi {}
 <!--body > section > p.noshow {-->
 <!--	display:none;-->
 <!--}-->
 body > section + section {
+	position:absolute;
+	top:300px;
+	left:0;
 	background:white;
 	height:75%;
 	text-align:center;
@@ -152,8 +169,11 @@ body > section + section ul li:hover {
 <body>
 
 <section>
+<img src="../static/top.png" id="banner"></img>
+<div id="autotext">
 <h1>AMIV Bierautomat 2.0</h1>
 <p id="legiok"></p>
+</div>
 </section>
 <!--<section>-->
 <!--<embed type="application/x-shockwave-flash"-->
