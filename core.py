@@ -140,8 +140,10 @@ if __name__ == "__main__":
 
     #Load Config Parameters
     config = ConfigParser.RawConfigParser()
-    config.readfp(open(os.path.dirname(__file__) + '/core.conf')) #changed this as well because not right directory otherwise (Fadri)
-    
+    if os.path.dirname(__file__):
+        config.readfp(open(os.path.dirname(__file__) + '/core.conf')) #changed this as well because not right directory otherwise (Fadri)
+    else:
+        config.readfp(open('core.conf')) #changed this as well because not right directory otherwise (Fadri)    
     dbuser = config.get("mysql", "user")
     dbpass = config.get("mysql", "pass")
     dbdatabase = config.get("mysql", "db")

@@ -3,6 +3,8 @@
 <head>
 <title>Bierautomat 2.0: Frontend Prototype</title>
 
+
+
 <script type=text/javascript src="{{
   url_for('static', filename='jquery.js') }}"></script>
 <script type=text/javascript>
@@ -19,23 +21,78 @@ $(function() {
             switch(pageVar){
                 case "authorized":
                     $("p#legiok").html("<b>Status:</b> Du hast noch ein Freibier! Sponsored by " + sponsorVar + " <br/\> Bitte Knopf dr&uuml;cken.");
-                    document.getElementById('banner').style.cssText = 'background-color:#7fff00';
+					
+                    document.getElementById('authorized_ampel_left').style.cssText = 'display:block';
+					document.getElementById('notAuthorized_ampel_left').style.cssText = 'display:none';
+					document.getElementById('notRegistered_ampel_left').style.cssText = 'display:none';
+					document.getElementById('freeBeer_ampel_left').style.cssText = 'display:none';
+					document.getElementById('legiok_ampel_left').style.cssText = 'display:none';
+					
+					document.getElementById('authorized_ampel_right').style.cssText = 'display:block';
+					document.getElementById('notAuthorized_ampel_right').style.cssText = 'display:none';
+					document.getElementById('notRegistered_ampel_right').style.cssText = 'display:none';
+					document.getElementById('freeBeer_ampel_right').style.cssText = 'display:none';
+					document.getElementById('legiok_ampel_right').style.cssText = 'display:none';
                     break;
                 case "notAuthorized":
                     $("p#legiok").html("<b>Status:</b> Dein Kontingent ist leider schon aufgebraucht!<br/\>Musst du halt bis morgen warten... ;-)");
-                    document.getElementById('banner').style.cssText = 'background-color:red';
+					
+                    document.getElementById('authorized_ampel_left').style.cssText = 'display:none';
+					document.getElementById('notAuthorized_ampel_left').style.cssText = 'display:block';
+					document.getElementById('notRegistered_ampel_left').style.cssText = 'display:none';
+					document.getElementById('freeBeer_ampel_left').style.cssText = 'display:none';
+					document.getElementById('legiok_ampel_left').style.cssText = 'display:none';
+					
+					document.getElementById('authorized_ampel_right').style.cssText = 'display:none';
+					document.getElementById('notAuthorized_ampel_right').style.cssText = 'display:block';
+					document.getElementById('notRegistered_ampel_right').style.cssText = 'display:none';
+					document.getElementById('freeBeer_ampel_right').style.cssText = 'display:none';
+					document.getElementById('legiok_ampel_right').style.cssText = 'display:none';
                     break;
                 case "notRegistered":
                     $("p#legiok").html("<b>Status:</b> Deine Legi ist leider nicht registriert!<br/\>Die Registrierung kannst du gleich selbst vornehmen.");
-                    document.getElementById('banner').style.cssText = 'background-color:pink';
+					
+                    document.getElementById('authorized_ampel_left').style.cssText = 'display:none';
+					document.getElementById('notAuthorized_ampel_left').style.cssText = 'display:none';
+					document.getElementById('notRegistered_ampel_left').style.cssText = 'display:block';
+					document.getElementById('freeBeer_ampel_left').style.cssText = 'display:none';
+					document.getElementById('legiok_ampel_left').style.cssText = 'display:none';
+					
+					document.getElementById('authorized_ampel_right').style.cssText = 'display:none';
+					document.getElementById('notAuthorized_ampel_right').style.cssText = 'display:none';
+					document.getElementById('notRegistered_ampel_right').style.cssText = 'display:block';
+					document.getElementById('freeBeer_ampel_right').style.cssText = 'display:none';
+					document.getElementById('legiok_ampel_right').style.cssText = 'display:none';
                     break;
                 case "freeBeer":
                     $("p#legiok").html("<b>Status:</b> Dein Freibier! Sponsored by " + sponsorVar + " <br/\> Bitte Knopf dr&uuml;cken.");
-                    document.getElementById('banner').style.cssText = 'background-color:#7fff00';
+					
+                    document.getElementById('authorized_ampel_left').style.cssText = 'display:none';
+					document.getElementById('notAuthorized_ampel_left').style.cssText = 'display:none';
+					document.getElementById('notRegistered_ampel_left').style.cssText = 'display:none';
+					document.getElementById('freeBeer_ampel_left').style.cssText = 'display:block';
+					document.getElementById('legiok_ampel_left').style.cssText = 'display:none';
+					
+					document.getElementById('authorized_ampel_right').style.cssText = 'display:none';
+					document.getElementById('notAuthorized_ampel_right').style.cssText = 'display:none';
+					document.getElementById('notRegistered_ampel_right').style.cssText = 'display:none';
+					document.getElementById('freeBeer_ampel_right').style.cssText = 'display:block';
+					document.getElementById('legiok_ampel_right').style.cssText = 'display:none';
                     break;
                 default:
                     $("p#legiok").html("<b>Status:</b> Es ist alles OK!<br/\>F&uuml;r Bierbezug bitte die Legi an den Leser halten.");
-                    document.getElementById('banner').style.cssText = 'background-color:lightblue';
+					
+                    document.getElementById('authorized_ampel_left').style.cssText = 'display:none';
+					document.getElementById('notAuthorized_ampel_left').style.cssText = 'display:none';
+					document.getElementById('notRegistered_ampel_left').style.cssText = 'display:none';
+					document.getElementById('freeBeer_ampel_left').style.cssText = 'display:none';
+					document.getElementById('legiok_ampel_left').style.cssText = 'display:block';
+					
+					document.getElementById('authorized_ampel_right').style.cssText = 'display:none';
+					document.getElementById('notAuthorized_ampel_right').style.cssText = 'display:none';
+					document.getElementById('notRegistered_ampel_right').style.cssText = 'display:none';
+					document.getElementById('freeBeer_ampel_right').style.cssText = 'display:none';
+					document.getElementById('legiok_ampel_right').style.cssText = 'display:block';
                     break;
             }
                     
@@ -69,6 +126,9 @@ $(function() {
 });
 </script>
 
+
+
+
 <!--<script type=text/javascript>-->
 <!--setInterval( "updateAMIV();", 500 ); -->
 <!--$SCRIPT_ROOT = {{ request.script_root|tojson|safe }};-->
@@ -89,10 +149,12 @@ $(function() {
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <style>
 html, body {
+	background-color:white;
 	padding:0;
 	margin:0;
 	overflow:hidden;
 }
+<!--
 body > div {
 	position:fixed;
 	top:10px;
@@ -115,28 +177,82 @@ body > section {
 	-moz-box-sizing:border-box;
 	-webkit-box-sizing:border-box;
 }
+-->
 #banner{
-	background-color:lightblue;
 	width:100%;
-	height:300px;
+	height:400px;
 	position:absolute;
 	top:0;
 	left:0;
-	z-index:1;
-}
-#autotext{
-	width:100%;
-	height:300px;
-	position:absolute;
-	top:20px;
-	left:0;
-	text-align:center;
 	z-index:2;
 }
-#legiok {}
+#text{
+	width:100%;
+	position:absolute;
+	top:-10px;
+	left:0;
+	text-align:center;
+	color:white;
+	z-index:3;
+	font-size:7mm;
+}
+
+#legiok{ display:block; }
+
+#legiok_ampel_left{display:block;}
+#freeBeer_ampel_left{ display:none; }
+#authorized_ampel_left{ display:none; }
+#notAuthorized_ampel_left{ display:none; }
+#notRegistered_ampel_left{ display:none; }
+
+#legiok_ampel_right{display:block;}
+#freeBeer_ampel_right{ display:none; }
+#authorized_ampel_right{ display:none; }
+#notAuthorized_ampel_right{ display:none; }
+#notRegistered_ampel_right{ display:none; }
+
+.top{
+	width:100%;
+	height:300px;
+	text-align:center;
+	padding:0;
+}
+.center {
+	position:absolute;
+	top:300px;
+	left:0;
+	width:100%;
+	height:75%;
+	text-align:center;
+	z-index:1;
+}
+
+.ampel_left{
+	position:absolute;
+	z-index:4;
+	top:30px;
+	left:200px;
+}
+.ampel_left img {
+	position:absolute;
+	width:100px;
+}
+.ampel_right{
+	position:absolute;
+	z-index:4;
+	top:30px;
+	right:300px;
+}
+.ampel_right img {
+	position:absolute;
+	width:100px;
+}
+
+
 <!--body > section > p.noshow {-->
 <!--	display:none;-->
 <!--}-->
+<!--
 body > section + section {
 	position:absolute;
 	top:300px;
@@ -145,10 +261,12 @@ body > section + section {
 	height:75%;
 	text-align:center;
 }
+
 body > section + section ul {
 	width:900px;
 	margin: 0 auto;
 }
+-->
 <!--body > section + section ul li {-->
 <!--	width:280px;-->
 <!--	float:left;-->
@@ -160,31 +278,53 @@ body > section + section ul {
 <!--	background-image: -moz-radial-gradient(#555, #999);-->
 <!--	background-image: -webkit-radial-gradient(#555, #999);-->
 <!--}-->
+<!--
 body > section + section ul li:hover {
 	background-image: -moz-radial-gradient(#999, #ccc);
 	background-image: -webkit-radial-gradient(#999, #ccc);
 }
+-->
+
 </style>
 </head>
+
 <body>
 
-<section>
-<img src="../static/top.png" id="banner"></img>
-<div id="autotext">
-<h1>AMIV Bierautomat 2.0</h1>
-<p id="legiok"></p>
-</div>
-</section>
-<!--<section>-->
-<!--<embed type="application/x-shockwave-flash"-->
-<!--src="https://picasaweb.google.com/s/c/bin/slideshow.swf" width="900"-->
-<!--height="600" flashvars="host=picasaweb.google.com&hl=de&feat=flashalbum&RGB=0x000000&feed=https%3A%2F%2Fpicasaweb.google.com%2Fdata%2Ffeed%2Fapi%2Fuser%2Fmattegli%2Falbumid%2F5204359244769674609%3Falt%3Drss%26kind%3Dphoto%26authkey%3DGv1sRgCIivobu2zK-41AE%26hl%3Dde"-->
-<!--pluginspage="http://www.macromedia.com/go/getflashplayer"></embed>-->
-<!--<p id="amivWebContent"></p>-->
-<!--</section>-->
-<section>
-<div id="img"></div>
-</section>
+	<section class="top">
+		<img src="../static/top_schatten.png" id="banner"></img>
+		<div id="text">
+			<h1>AMIV Bierautomat 2.0</h1>
+			<p id="legiok"></p>
+		</div>
+		<div class="ampel_left">
+			<img src="../static/authorized.png" id="authorized_ampel_left"></img>
+			<img src="../static/notAuthorized.png" id="notAuthorized_ampel_left"></img>
+			<img src="../static/freeBeer.png" id="freeBeer_ampel_left"></img>
+			<img src="../static/legiok.png"  id="legiok_ampel_left"></img>
+			<img src="../static/notRegistered.png"  id="notRegistered_ampel_left"></img>
+		</div>
+		
+		<div class="ampel_right">
+			<img src="../static/authorized.png" id="authorized_ampel_right"></img>
+			<img src="../static/notAuthorized.png" id="notAuthorized_ampel_right"></img>
+			<img src="../static/freeBeer.png" id="freeBeer_ampel_right"></img>
+			<img src="../static/legiok.png"  id="legiok_ampel_right"></img>
+			<img src="../static/notRegistered.png"  id="notRegistered_ampel_right"></img>
+		</div>
+	</section>
+	
+	<!--<section>-->
+	<!--<embed type="application/x-shockwave-flash"-->
+	<!--src="https://picasaweb.google.com/s/c/bin/slideshow.swf" width="900"-->
+	<!--height="600" flashvars="host=picasaweb.google.com&hl=de&feat=flashalbum&RGB=0x000000&feed=https%3A%2F%2Fpicasaweb.google.com%2Fdata%2Ffeed%2Fapi%2Fuser%2Fmattegli%2Falbumid%2F5204359244769674609%3Falt%3Drss%26kind%3Dphoto%26authkey%3DGv1sRgCIivobu2zK-41AE%26hl%3Dde"-->
+	<!--pluginspage="http://www.macromedia.com/go/getflashplayer"></embed>-->
+	<!--<p id="amivWebContent"></p>-->
+	<!--</section>-->
+	
+	<section class="center">
+		<div id="img"></div>	
+	</section>
+	
 </body>
 </html>
 
